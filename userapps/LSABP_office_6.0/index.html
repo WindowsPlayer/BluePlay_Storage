@@ -1,0 +1,669 @@
+
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#171923">
+<title>LSaBP Office</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- ================================== -->
+<!-- TOPBAR -->
+<!-- ================================== -->
+
+<header class="topbar">
+
+  <div class="brand">
+    <div class="logo">L</div>
+    <div>
+      <b>LSaBP Office</b>
+      <small>One workspace. Everything you need.</small>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <span id="saveState" class="save-state">Pripravené</span>
+    <button class="icon-btn" id="themeBtn" title="Zmeniť vzhľad">◐</button>
+    <button class="icon-btn" id="helpBtn" title="Nápoveda">?</button>
+  </div>
+
+</header>
+
+
+<!-- ================================== -->
+<!-- SIDEBAR -->
+<!-- ================================== -->
+
+<aside class="sidebar">
+
+  <div class="side-label">WORKSPACE</div>
+
+  <button class="nav active" data-view="home">
+    <span>⌂</span> Domov
+  </button>
+
+  <button class="nav" data-view="writer">
+    <span>▤</span> Writer
+  </button>
+
+  <button class="nav" data-view="calc">
+    <span>▦</span> Calc
+  </button>
+
+  <button class="nav" data-view="impress">
+    <span>▣</span> Impress
+  </button>
+
+  <div class="side-sep"></div>
+
+  <div class="side-label">FILES</div>
+
+  <button class="nav" id="openFile">
+    <span>↥</span> Otvoriť súbor
+  </button>
+
+  <button class="nav" id="newFile">
+    <span>＋</span> Nový dokument
+  </button>
+
+  <div class="side-sep"></div>
+
+  <div class="side-label">PREFERENCES</div>
+
+  <button class="nav" id="settingsBtn">
+    <span>⚙</span> Nastavenia
+  </button>
+
+  <div class="sidebar-bottom">
+    <div class="status-dot"></div>
+    <span>Local workspace</span>
+    <small>LSaBP</small>
+  </div>
+
+</aside>
+
+
+<!-- ================================== -->
+<!-- MAIN -->
+<!-- ================================== -->
+
+<main class="main">
+
+
+<!-- ================================== -->
+<!-- HOME -->
+<!-- Z verzie 1.0 -->
+<!-- ================================== -->
+
+<section id="homeView" class="view active">
+
+  <div class="welcome">
+
+    <div>
+      <p class="eyebrow">YOUR CREATIVE WORKSPACE</p>
+
+      <h1>
+        Vytvor niečo<br>
+        <em>výnimočné.</em>
+      </h1>
+
+      <p class="sub">
+        Píš dokumenty, pracuj s údajmi a vytváraj
+        prezentácie na jednom mieste.
+      </p>
+    </div>
+
+    <div class="welcome-art">
+      <div class="art-card a1">W</div>
+      <div class="art-card a2">▦</div>
+      <div class="art-card a3">▣</div>
+    </div>
+
+  </div>
+
+
+  <div class="section-head">
+    <div>
+      <h2>Začni pracovať</h2>
+      <p>Vyber si aplikáciu.</p>
+    </div>
+  </div>
+
+
+  <div class="launch-grid">
+
+    <button class="launch writer-card" data-open="writer">
+      <span class="launch-icon">W</span>
+      <b>Writer</b>
+      <small>Dokumenty, poznámky a listy</small>
+      <span class="launch-arrow">↗</span>
+    </button>
+
+    <button class="launch calc-card" data-open="calc">
+      <span class="launch-icon">▦</span>
+      <b>Calc</b>
+      <small>Tabuľky, vzorce a grafy</small>
+      <span class="launch-arrow">↗</span>
+    </button>
+
+    <button class="launch impress-card" data-open="impress">
+      <span class="launch-icon">▣</span>
+      <b>Impress</b>
+      <small>Prezentácie a snímky</small>
+      <span class="launch-arrow">↗</span>
+    </button>
+
+  </div>
+
+
+  <div class="section-head recent-head">
+
+    <div>
+      <h2>Nedávne dokumenty</h2>
+      <p>Tvoje dokumenty uložené v tomto zariadení.</p>
+    </div>
+
+    <button class="text-btn" id="clearRecent">
+      Vymazať zoznam
+    </button>
+
+  </div>
+
+  <div id="recentList" class="recent-list">
+    <div class="empty">
+      Zatiaľ tu nie sú žiadne dokumenty.
+    </div>
+  </div>
+
+
+  <div class="note">
+    <b>🔒 Tvoje súbory zostávajú tvoje.</b>
+    Dokumenty sa ukladajú lokálne v tvojom zariadení.
+  </div>
+
+</section>
+
+
+
+<!-- ================================== -->
+<!-- WRITER -->
+<!-- Rozhranie z verzie 5.0 -->
+<!-- ================================== -->
+
+<section id="writerView" class="view editor-view">
+
+  <div class="editor-heading">
+
+    <div>
+      <button class="back-btn" data-view="home">
+        ← Domov
+      </button>
+
+      <span class="app-tag writer-tag">WRITER</span>
+
+      <h1>Writer</h1>
+    </div>
+
+    <div class="file-actions">
+
+      <input
+        id="docName"
+        value="Nový dokument"
+        aria-label="Názov dokumentu"
+      >
+
+      <button class="btn" id="newDoc">Nový</button>
+      <button class="btn" id="importDoc">Otvoriť</button>
+      <button class="btn primary" id="saveDoc">Uložiť</button>
+      <button class="btn" id="exportDoc">Exportovať</button>
+
+      <input
+        type="file"
+        id="docFile"
+        accept=".lsabp,.json,.html,.txt"
+        hidden
+      >
+
+    </div>
+
+  </div>
+
+
+  <!-- WRITER TOOLBAR -->
+
+  <div class="toolbar">
+
+    <select id="fontName">
+      <option>Arial</option>
+      <option>Georgia</option>
+      <option>Verdana</option>
+      <option>Courier New</option>
+      <option>Times New Roman</option>
+    </select>
+
+    <select id="fontSize">
+      <option value="2">Malé</option>
+      <option value="3" selected>Normálne</option>
+      <option value="4">Veľké</option>
+      <option value="5">Veľmi veľké</option>
+      <option value="6">Nadpis</option>
+    </select>
+
+    <span class="tool-divider"></span>
+
+    <button data-cmd="bold"><b>B</b></button>
+    <button data-cmd="italic"><i>I</i></button>
+    <button data-cmd="underline"><u>U</u></button>
+    <button data-cmd="strikeThrough"><s>S</s></button>
+
+    <span class="tool-divider"></span>
+
+    <button data-cmd="justifyLeft">☰</button>
+    <button data-cmd="justifyCenter">≡</button>
+    <button data-cmd="justifyRight">☷</button>
+
+    <span class="tool-divider"></span>
+
+    <button data-cmd="insertUnorderedList">• Zoznam</button>
+    <button data-cmd="insertOrderedList">1. Zoznam</button>
+
+    <span class="tool-divider"></span>
+
+    <button id="imageBtn">＋ Obrázok</button>
+    <button id="imgSmaller">− Obrázok</button>
+    <button id="imgBigger">＋ Veľkosť</button>
+    <button id="imgReset">Pôvodná veľkosť</button>
+    <button id="imgFree">Voľné presúvanie</button>
+
+    <input
+      type="file"
+      id="imageInput"
+      accept="image/*"
+      hidden
+    >
+
+  </div>
+
+
+  <!-- WRITER PAPER -->
+
+  <div class="paper-wrap">
+
+    <article
+      id="editor"
+      class="paper"
+      contenteditable="true"
+      spellcheck="true"
+    >
+
+      <h1>Nový dokument</h1>
+
+      <p>
+        Vitaj v LSaBP Office Writer.
+      </p>
+
+      <p>
+        Začni písať svoj dokument.
+        Môžeš formátovať text, pridávať obrázky
+        a vytvárať vlastný obsah.
+      </p>
+
+    </article>
+
+  </div>
+
+
+  <div class="editor-footer">
+
+    <span id="wordCount">0 slov</span>
+
+    <span>
+      LSaBP Office · Writer
+    </span>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================================== -->
+<!-- CALC -->
+<!-- Rozhranie z verzie 5.0 -->
+<!-- ================================== -->
+
+<section id="calcView" class="view editor-view">
+
+  <div class="editor-heading">
+
+    <div>
+      <button class="back-btn" data-view="home">
+        ← Domov
+      </button>
+
+      <span class="app-tag calc-tag">CALC</span>
+
+      <h1>Calc</h1>
+    </div>
+
+    <div class="file-actions">
+
+      <input
+        id="sheetName"
+        value="Môj hárok"
+        aria-label="Názov hárka"
+      >
+
+      <button class="btn" id="newSheet">Nový</button>
+      <button class="btn" id="loadBook">Načítať</button>
+      <button class="btn primary" id="saveSheet">Uložiť</button>
+      <button class="btn" id="exportSheet">Exportovať CSV</button>
+      <button class="btn" id="exportBook">Uložiť .lsabp</button>
+
+      <input
+        type="file"
+        id="bookFile"
+        accept=".lsabp,.json,.csv"
+        hidden
+      >
+
+    </div>
+
+  </div>
+
+
+  <!-- CALC TOOLBAR -->
+
+  <div class="calc-toolbar">
+
+    <div class="name-box" id="cellRef">
+      A1
+    </div>
+
+    <span class="fx">fx</span>
+
+    <input
+      id="formula"
+      placeholder="Zadaj hodnotu alebo vzorec, napr. =SUM(A1:A5)"
+    >
+
+    <button class="btn" id="addRow">
+      ＋ Riadok
+    </button>
+
+    <button class="btn" id="addCol">
+      ＋ Stĺpec
+    </button>
+
+    <button class="btn" id="clearSheet">
+      Vymazať hárok
+    </button>
+
+  </div>
+
+
+  <!-- CALC GRID -->
+
+  <div class="sheet-wrap">
+
+    <div class="sheet-scroll">
+      <table id="grid"></table>
+    </div>
+
+  </div>
+
+
+  <div class="calc-status">
+
+    <span id="cellCount">Bunka A1</span>
+
+    <span>
+      Vzorce: SUM · AVERAGE · MIN · MAX · COUNT
+    </span>
+
+  </div>
+
+</section>
+
+
+
+<!-- ================================== -->
+<!-- IMPRESS -->
+<!-- Z verzie 1.0 -->
+<!-- ================================== -->
+
+<section id="impressView" class="view editor-view">
+
+  <div class="editor-heading">
+
+    <div>
+      <button class="back-btn" data-view="home">
+        ← Domov
+      </button>
+
+      <span class="app-tag impress-tag">IMPRESS</span>
+
+      <h1>Impress</h1>
+    </div>
+
+    <div class="file-actions">
+
+      <input
+        id="presName"
+        value="Nová prezentácia"
+        aria-label="Názov prezentácie"
+      >
+
+      <button class="btn" id="presOpen">Otvoriť</button>
+      <button class="btn primary" id="presSave">Uložiť</button>
+      <button class="btn" id="presExport">Export PDF</button>
+
+    </div>
+
+  </div>
+
+
+  <!-- IMPRESS TOOLBAR -->
+
+  <div class="pres-toolbar">
+
+    <button class="btn" id="addSlide">
+      ＋ Nová snímka
+    </button>
+
+    <button class="btn" id="duplicateSlide">
+      Duplikovať
+    </button>
+
+    <button class="btn" id="deleteSlide">
+      Odstrániť
+    </button>
+
+    <button class="btn" id="addText">
+      ＋ Textové pole
+    </button>
+
+    <button class="btn primary" id="presentBtn">
+      ▶ Prezentovať
+    </button>
+
+    <span class="pres-hint">
+      Kliknutím na text ho môžeš upraviť.
+    </span>
+
+  </div>
+
+
+  <!-- IMPRESS WORKSPACE -->
+
+  <div class="pres-workspace">
+
+    <div id="slideList" class="slide-list"></div>
+
+    <div class="slide-stage">
+
+      <div id="slideCanvas" class="slide-canvas">
+
+        <div
+          class="slide-title"
+          contenteditable="true"
+        >
+          Vitaj v LSaBP Impress
+        </div>
+
+        <div
+          class="slide-subtitle"
+          contenteditable="true"
+        >
+          Tvoja ďalšia prezentácia začína tu.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="editor-footer">
+
+    <span id="slideCount">Snímka 1 z 1</span>
+
+    <span>LSaBP Office · Impress</span>
+
+  </div>
+
+</section>
+
+
+</main>
+</div>
+
+
+
+<!-- ================================== -->
+<!-- GLOBAL FILE INPUTS -->
+<!-- ================================== -->
+
+<input type="file" id="filePicker" hidden>
+
+<input
+  type="file"
+  id="imagePicker"
+  accept="image/*"
+  hidden
+>
+
+
+
+<!-- ================================== -->
+<!-- TOAST -->
+<!-- ================================== -->
+
+<div id="toast" class="toast"></div>
+
+
+
+<!-- ================================== -->
+<!-- HELP MODAL -->
+<!-- ================================== -->
+
+<div id="helpModal" class="modal">
+
+  <div class="modal-card">
+
+    <button class="modal-close" id="closeHelp">×</button>
+
+    <h2>LSaBP Office – Nápoveda</h2>
+
+    <h3>Writer</h3>
+
+    <p>
+      Writer slúži na vytváranie a úpravu dokumentov.
+      Môžeš formátovať text a pridávať obrázky.
+    </p>
+
+    <h3>Calc</h3>
+
+    <p>
+      Calc slúži na prácu s tabuľkami, údajmi a vzorcami.
+      Podporuje napríklad SUM, AVERAGE, MIN a MAX.
+    </p>
+
+    <h3>Impress</h3>
+
+    <p>
+      Impress slúži na vytváranie prezentácií
+      pomocou snímok, textov a ďalších prvkov.
+    </p>
+
+    <h3>Ukladanie</h3>
+
+    <p>
+      Dokumenty môžeš ukladať lokálne.
+      Pomocou exportu si môžeš vytvoriť samostatný súbor.
+    </p>
+
+    <p class="muted">
+      LSaBP Office – spoločné pracovné prostredie.
+    </p>
+
+    <button class="btn primary" id="closeHelp2">
+      Rozumiem
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================================== -->
+<!-- SETTINGS PLACEHOLDER -->
+<!-- Neskôr prepojíme s Draw aplikáciou -->
+<!-- ================================== -->
+
+<div id="settingsModal" class="modal">
+
+  <div class="modal-card">
+
+    <button class="modal-close" id="closeSettings">×</button>
+
+    <h2>Nastavenia</h2>
+
+    <p>
+      Spoločné nastavenia LSaBP Office budú
+      pridané v ďalšej fáze vývoja.
+    </p>
+
+    <p>
+      Pripravujeme:
+    </p>
+
+    <ul>
+      <li>Advanced Settings</li>
+      <li>Wallpapers</li>
+      <li>Themes</li>
+      <li>Draw integráciu</li>
+    </ul>
+
+  </div>
+
+</div>
+
+
+
+<!-- ================================== -->
+<!-- JAVASCRIPT -->
+<!-- ================================== -->
+
+<script src="app.js"></script>
+
+</body>
+</html>

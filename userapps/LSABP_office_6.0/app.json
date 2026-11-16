@@ -1,0 +1,8 @@
+{
+    "id": "LSABP_office_6.0",
+    "name": "LSaBP Office",
+    "version": "5.0",
+    "type": "System",
+    "icon": "icon.png",
+    "runInBackground": false
+}
